@@ -17,7 +17,8 @@ function SignUp() {
     try {
       const response = await axios.post(`${url}/adduser`, {
         email: loginDetails.email,
-        password: loginDetails.password
+        password: loginDetails.password,
+        socketId : ""
       })
       console.log(response.data.user);
       setUser(response.data.user);

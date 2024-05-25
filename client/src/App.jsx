@@ -10,7 +10,6 @@ import {io} from "socket.io-client"
 
 function App() {
   const { user, setUser, isLogged, setLogged } = useUserInfo();
-  console.log(user , isLogged);
   const token = localStorage.getItem("token")
 
   useEffect(() => {
@@ -21,7 +20,7 @@ function App() {
             token: token
           }
         });
-        console.log(response);
+        // console.log(response);
         setLogged(response.data.login)
         setUser(response.data.user)
       } catch (error) {
@@ -29,7 +28,7 @@ function App() {
       }
     }
     if (token) login();
-  },[isLogged])
+  },[])
 
   // useEffect(()=>{
   //   const server = import.meta.env.VITE_SERVER;

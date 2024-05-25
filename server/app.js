@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const app = express();
 import 'dotenv/config'
 import loginRouter from "./Routes/Auth/localAuth.js";
+import ContactRouter from "./Routes/Contacts/contact.js";
 import {createServer} from "http";
 import { Server } from "socket.io";
 import cors from "cors";
@@ -14,6 +15,7 @@ app.use(cors({
 }));
 
 const server = createServer(app);
+
 const io = new Server(server , {
     cors : {
         origin : `${client}`,
@@ -32,8 +34,6 @@ mongoose.connect(mongoUrl).then(()=>{
 
 io.on("connection",(socket)=>{
     console.log(`${socket.id} connected`);
-    socket.emit("welcome","welcome to the chat!")
-    socket.broadcast.emit("joined-msg",`${socket.id} joined the server!`)
 
     socket.on("message",({msg,room})=>{
         console.log(msg);
@@ -55,6 +55,7 @@ app.get("/",(req,res)=>{
 })
 
 app.use(loginRouter);
+app.use(ContactRouter);
 
 server.listen(3000,()=>{
     console.log(`Server is live on 3000`);

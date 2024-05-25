@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 import User from "../../Models/user.js";
 import bcrypt from "bcrypt"
 const saltRounds = 10;
-import express from "express";
 
 export const getUser = (req, res) => {
     const token = req.headers.token;
@@ -28,7 +27,7 @@ export const getUser = (req, res) => {
 
 
 export const loginUser = (req, res) => {
-    const { email, password } = req.body;
+    const { email, password} = req.body;
     const secret = process.env.JWT_SECRET;
     User.findOne({ email: email }).then((response) => {
         if (!response) {
@@ -71,7 +70,7 @@ export const loginUser = (req, res) => {
 
 
 export const addUser = (req, res) => {
-    const { email, password } = req.body;
+    const { email, password , socketId } = req.body;
     const secret = process.env.JWT_SECRET;
     User.findOne({ email: email }).then((response) => {
         if (response) {
@@ -91,7 +90,8 @@ export const addUser = (req, res) => {
 
                     const newUser = new User({
                         email: email,
-                        password: hash
+                        password: hash,
+                        socketId
                     });
 
                     newUser.save().then((response) => {
