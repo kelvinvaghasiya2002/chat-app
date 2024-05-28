@@ -7,7 +7,8 @@ function SignUp() {
   const {user , setUser , isLogged , setLogged} = useUserInfo();
   const [loginDetails, setLoginDetails] = useState({
     email: "",
-    password: ""
+    password: "",
+    username : ""
   })
 
   const handleSubmit = async (e) => {
@@ -18,7 +19,8 @@ function SignUp() {
       const response = await axios.post(`${url}/adduser`, {
         email: loginDetails.email,
         password: loginDetails.password,
-        socketId : ""
+        socketId : "",
+        username:loginDetails.username
       })
       console.log(response.data.user);
       setUser(response.data.user);
@@ -45,6 +47,15 @@ function SignUp() {
         value={loginDetails.email}
         placeholder="email"
         type="email"
+        onChange={handleChange} />
+
+      <br /><br />
+
+      <input
+        name="username"
+        value={loginDetails.username}
+        placeholder="username"
+        type="text"
         onChange={handleChange} />
 
       <br /><br />

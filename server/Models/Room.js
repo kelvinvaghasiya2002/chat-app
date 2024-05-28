@@ -17,3 +17,8 @@ const roomSchema = new mongoose.Schema({
         type : [messageSchema]
     }
 })
+
+
+const Room = new mongoose.model("Room",roomSchema);
+
+export default Room;

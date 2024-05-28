@@ -1,6 +1,18 @@
 import mongoose, { Mongoose } from "mongoose";
 
+const ContactSchema = new mongoose.Schema({
+    email : {
+        type : String
+    },
+    username : {
+        type : String
+    }
+})
+
 const UserSchema = new mongoose.Schema({
+    username : {
+        type : String
+    },
     email : {
         type : String
     },
@@ -9,6 +21,9 @@ const UserSchema = new mongoose.Schema({
     },
     socketId : {
         type : String
+    },
+    contacts : {
+        type : [ContactSchema]
     }
 });
 

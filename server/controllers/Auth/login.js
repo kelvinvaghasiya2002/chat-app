@@ -5,7 +5,7 @@ const saltRounds = 10;
 
 export const getUser = (req, res) => {
     const token = req.headers.token;
-    console.log(req.headers);
+    // console.log(req.headers);
     const secret = process.env.JWT_SECRET;
     const user = jwt.verify(token, secret);
     User.findOne({ email: user.email }).then((response) => {
@@ -70,7 +70,7 @@ export const loginUser = (req, res) => {
 
 
 export const addUser = (req, res) => {
-    const { email, password , socketId } = req.body;
+    const { email, password , socketId , username } = req.body;
     const secret = process.env.JWT_SECRET;
     User.findOne({ email: email }).then((response) => {
         if (response) {
@@ -91,7 +91,8 @@ export const addUser = (req, res) => {
                     const newUser = new User({
                         email: email,
                         password: hash,
-                        socketId
+                        socketId,
+                        username
                     });
 
                     newUser.save().then((response) => {

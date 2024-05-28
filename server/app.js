@@ -10,7 +10,7 @@ import cors from "cors";
 const client = process.env.CLIENT;
 app.use(cors({
     origin : `${client}`,
-    methods : ["GET","POST"],
+    methods : ["GET","POST","PUT","PATCH","DELETE"],
     credentials : true
 }));
 
@@ -19,7 +19,7 @@ const server = createServer(app);
 const io = new Server(server , {
     cors : {
         origin : `${client}`,
-        methods : ["GET","POST"],
+        methods : ["GET","POST","PUT","PATCH","DELETE"],
         credentials : true
     }
 });
