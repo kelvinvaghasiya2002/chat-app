@@ -20,7 +20,8 @@ const UserSchema = new mongoose.Schema({
         type : String
     },
     socketId : {
-        type : String
+        type : String,
+        default : null
     },
     contacts : {
         type : [ContactSchema]

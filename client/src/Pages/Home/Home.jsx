@@ -11,12 +11,12 @@ function Home() {
   const [email, setEmail] = useState("");
   const server = import.meta.env.VITE_SERVER;
   const socket = useMemo(() => io(server), [])
-  console.log(socketContext);
 
   useEffect(() => {
     setSocketContext(socket);
     socket.on("connect", () => {
       console.log(`${socket.id} connected`);
+      socket.emit("send-email",user.email);
     })
 
     return () => {
@@ -28,6 +28,7 @@ function Home() {
     event.preventDefault();
     const response = await axios.post(`${server}/addcontact`,{
       user_1 : user.email,
+      username_1 : user.username,
       user_2 : email
     })
     console.log(response);

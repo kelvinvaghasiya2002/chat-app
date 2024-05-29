@@ -1,20 +1,20 @@
 import express from "express";
 import mongoose from "mongoose";
-const app = express();
 import 'dotenv/config'
 import loginRouter from "./Routes/Auth/localAuth.js";
 import ContactRouter from "./Routes/Contacts/contact.js";
 import {createServer} from "http";
 import { Server } from "socket.io";
 import cors from "cors";
-const client = process.env.CLIENT;
-app.use(cors({
-    origin : `${client}`,
-    methods : ["GET","POST","PUT","PATCH","DELETE"],
-    credentials : true
-}));
+import socketHandler from "./socket.js";
 
+
+// -------------------------- Declarations ---------------------------
+
+const app = express();
+const client = process.env.CLIENT;
 const server = createServer(app);
+const mongoUrl = process.env.MONGO_URL;
 
 const io = new Server(server , {
     cors : {
@@ -24,7 +24,17 @@ const io = new Server(server , {
     }
 });
 
-const mongoUrl = process.env.MONGO_URL;
+
+
+// ----------------------------------------------------
+
+
+app.use(cors({
+    origin : `${client}`,
+    methods : ["GET","POST","PUT","PATCH","DELETE"],
+    credentials : true
+}));
+
 
 mongoose.connect(mongoUrl).then(()=>{
     console.log("Database Connected");
@@ -32,30 +42,18 @@ mongoose.connect(mongoUrl).then(()=>{
     console.log(err);
 })
 
-io.on("connection",(socket)=>{
-    console.log(`${socket.id} connected`);
-
-    socket.on("message",({msg,room})=>{
-        console.log(msg);
-        socket.to(room).emit("msg",msg);
-    })
-
-    socket.on("disconnect",()=>{
-        console.log(`${socket.id} disconnected`);
-    })
-
-    socket.on("msg",(m)=>{
-        console.log(m);
-    })
-})
+socketHandler(io);  // function from socket.js file
 
 
-app.get("/",(req,res)=>{
-    res.send("Hello World")
-})
+// ------------------------  Routers -----------------------------
 
 app.use(loginRouter);
 app.use(ContactRouter);
+
+
+
+// ---------------------------------------------------------------
+
 
 server.listen(3000,()=>{
     console.log(`Server is live on 3000`);

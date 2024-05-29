@@ -6,7 +6,6 @@ import { useEffect } from "react"
 import axios from "axios"
 import { useUserInfo } from "./Contexts/user.jsx"
 import SignUp from "./Pages/SignUp/SignUp.jsx"
-import {io} from "socket.io-client"
 
 function App() {
   const { user, setUser, isLogged, setLogged } = useUserInfo();
@@ -20,7 +19,7 @@ function App() {
             token: token
           }
         });
-        // console.log(response);
+        console.log(response);
         setLogged(response.data.login)
         setUser(response.data.user)
       } catch (error) {
