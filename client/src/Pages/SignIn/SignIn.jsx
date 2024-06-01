@@ -6,7 +6,7 @@ import { Link, Navigate } from "react-router-dom";
 import { useUserInfo } from "../../Contexts/user.jsx";
 
 function SignIn() {
-  const {user , setUser , isLogged , setLogged} = useUserInfo();
+  const { setUser , isLogged , setLogged} = useUserInfo();
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: ""

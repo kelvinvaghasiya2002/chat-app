@@ -1,20 +1,21 @@
 import Room from "../../Models/Room.js";
 import User from "../../Models/user.js";
+import { io } from "../../app.js";
+
 
 const addContact = (req, res) => {
     const { user_1, user_2, username_1 } = req.body;
 
     User.findOne({ email: user_1 }).then((response) => {
         const arr = response.contacts;
-        const flag = arr.some((element) => {
-            return element.email === user_2
-        })
+        const flag = arr.some((element) => element.email === user_2)
+
         if (!flag) {
             User.findOne({ email: user_2 }).then((response) => {
                 console.log(response);
                 if (response) {
 
-                    User.updateOne({ email: user_2 }, {
+                    User.findOneAndUpdate({ email: user_2 }, {
                         $push: {
                             contacts: {
                                 email: user_1,
@@ -22,12 +23,15 @@ const addContact = (req, res) => {
                             }
                         }
                     }, { new: true }).then((response) => {
-                        console.log("Contact added in user_2");
+                        console.log("Contact added in user_2",response);
+                        io.to(response.socketId).emit("from-user",response);
                     }).catch((err) => {
                         console.log(err);
                     })
 
-                    User.updateOne({ email: user_1 }, {
+                    
+
+                    User.findOneAndUpdate({ email: user_1 }, {
                         $push: {
                             contacts: {
                                 email: user_2,
@@ -36,8 +40,15 @@ const addContact = (req, res) => {
                         }
                     }, { new: true }).then((response) => {
                         console.log("Contact added in user_1");
+                        res.status(200).json({
+                            success: "Contact is added successfully!",
+                            user: response
+                        })
                     }).catch((err) => {
                         console.log(err);
+                        res.status(500).json({
+                            error: "Error occured in creating contact!"
+                        })
                     })
 
 
@@ -46,15 +57,9 @@ const addContact = (req, res) => {
                         members: [user_1, user_2],
                     })
                     room.save().then((response) => {
-                        res.status(200).json({
-                            success: "Contact is added successfully!",
-                            response: response
-                        })
+                        console.log("Room Is Created!");
                     }).catch((err) => {
                         console.log(err);
-                        res.status(500).json({
-                            error: "Error occured in creating contact!"
-                        })
                     })
                 } else {
                     res.status(400).json({

@@ -16,7 +16,7 @@ const client = process.env.CLIENT;
 const server = createServer(app);
 const mongoUrl = process.env.MONGO_URL;
 
-const io = new Server(server , {
+export const io = new Server(server , {
     cors : {
         origin : `${client}`,
         methods : ["GET","POST","PUT","PATCH","DELETE"],
@@ -42,7 +42,7 @@ mongoose.connect(mongoUrl).then(()=>{
     console.log(err);
 })
 
-socketHandler(io);  // function from socket.js file
+const socket = socketHandler(io);  // function from socket.js file
 
 
 // ------------------------  Routers -----------------------------

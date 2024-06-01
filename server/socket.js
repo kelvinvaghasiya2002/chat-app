@@ -1,7 +1,10 @@
 import User from "./Models/user.js";
 
+var exportSocket;
+
 const socketHandler = (io) => {
     io.on("connection", (socket) => {
+        exportSocket = socket;
         console.log(`${socket.id} connected`);
 
         socket.on("message", ({ msg, room }) => {
@@ -17,11 +20,13 @@ const socketHandler = (io) => {
             console.log(m);
         })
 
+        socket.emit("hi","Heelo")
+
         socket.on("disconnect", () => {
             console.log(`${socket.id} disconnected`);
             deleteSocketId(socket.id)
         })
-    })
+    }) 
 }
 
 
@@ -50,4 +55,5 @@ const deleteSocketId = (socketId) => {
     })
 }
 
-export default socketHandler;
+export default socketHandler 
+export {exportSocket};

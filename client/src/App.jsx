@@ -6,15 +6,17 @@ import { useEffect } from "react"
 import axios from "axios"
 import { useUserInfo } from "./Contexts/user.jsx"
 import SignUp from "./Pages/SignUp/SignUp.jsx"
+const server = import.meta.env.VITE_SERVER;
 
 function App() {
   const { user, setUser, isLogged, setLogged } = useUserInfo();
   const token = localStorage.getItem("token")
 
   useEffect(() => {
+    
     const login = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/getuser', {
+        const response = await axios.get(`${server}/getuser`, {
           headers: {
             token: token
           }
