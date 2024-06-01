@@ -50,7 +50,11 @@ const socket = socketHandler(io);  // function from socket.js file
 app.use(loginRouter);
 app.use(ContactRouter);
 
-
+app.get("/",(req,res)=>{
+    res.json({
+        success : "Deployed Successfully!"
+    })
+})
 
 // ---------------------------------------------------------------
 
