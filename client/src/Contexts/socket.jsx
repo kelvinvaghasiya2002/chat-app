@@ -1,21 +1,21 @@
-import { createContext, useContext, useState } from "react";
+// import { createContext, useContext, useMemo, useState } from "react";
 
 
-const SocketContext = createContext({});
+// const SocketContext = createContext({});
 
-export const useSocketInfo = () => {
-    const socket = useContext(SocketContext);
-    return socket;
-}
+// export const useSocketInfo = () => {
+//     const socket = useContext(SocketContext);
+//     return socket;
+// }
 
 
-export default function SocketProvider(props) {
-    const [socketContext, setSocketContext] = useState({})
-    return (
-        <SocketContext.Provider value={{ socketContext, setSocketContext }}>
-            {props.children}
-        </SocketContext.Provider>
-    )
-}
+// export default function SocketProvider(props) {
+//     const socket = useMemo(() => io(server), [])
+//     return (
+//         <SocketContext.Provider value={{ }}>
+//             {props.children}
+//         </SocketContext.Provider>
+//     )
+// }
 
 

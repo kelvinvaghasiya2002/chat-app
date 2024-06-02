@@ -1,17 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { io } from "socket.io-client"
 import { useUserInfo } from '../../Contexts/user';
-import axios from 'axios';
 import ContactList from '../../Components/ContactList.jsx';
+import AddContact from '../../Components/AddContact.jsx';
 const server = import.meta.env.VITE_SERVER;
-
+var socket;
 
 
 function Home() {
-  const { user, setUser, isLogged, setLogged } = useUserInfo();
-  const [email, setEmail] = useState("");
-
-  const socket = useMemo(() => io(server), [])
+  const { user, setUser } = useUserInfo();
+  socket = useMemo(() => io(server), [])
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -23,37 +21,11 @@ function Home() {
       socket.disconnect();
     }
   }, [])
-
-  socket.on("from-user", (m) => {
-    setUser(m)
-  })
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const response = await axios.post(`${server}/addcontact`, {
-      user_1: user.email,
-      username_1: user.username,
-      user_2: email
-    })
-    console.log(response);
-    setUser(response.data.user);
-  }
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  }
+  
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder='enter a email'
-          value={email}
-          name='email'
-          onChange={handleEmailChange}
-        />
-        <button type='submit'>Add</button>
-      </form>
+      <AddContact />
       <br /><br />
 
       <ContactList contacts={user.contacts} />
@@ -61,4 +33,5 @@ function Home() {
   )
 }
 
+export {socket}
 export default Home
