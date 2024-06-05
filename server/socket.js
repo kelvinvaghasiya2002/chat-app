@@ -1,11 +1,9 @@
 import User from "./Models/user.js";
 
 
-
 const socketHandler = (io) => {
     io.on("connection", (socket) => {
         console.log(`${socket.id} connected`);
-
         socket.on("message", ({ msg, room }) => {
             console.log(msg);
             socket.to(room).emit("msg", msg);
@@ -17,6 +15,12 @@ const socketHandler = (io) => {
 
         socket.on("msg", (m) => {
             console.log(m);
+        })
+
+        socket.on("join-room",(id)=>{
+            console.log("Hey", id);
+            socket.join(id);
+            // console.log(socket.rooms);
         })
 
         socket.emit("hi","Heelo")
@@ -53,5 +57,6 @@ const deleteSocketId = (socketId) => {
         console.log(err);
     })
 }
+
 
 export default socketHandler 

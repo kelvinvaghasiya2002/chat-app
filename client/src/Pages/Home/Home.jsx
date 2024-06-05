@@ -3,6 +3,10 @@ import { io } from "socket.io-client"
 import { useUserInfo } from '../../Contexts/user';
 import ContactList from '../../Components/ContactList.jsx';
 import AddContact from '../../Components/AddContact.jsx';
+import { Outlet } from 'react-router-dom';
+import RoomProvider from '../../Contexts/room.jsx';
+import "./Home.css"
+
 const server = import.meta.env.VITE_SERVER;
 var socket;
 
@@ -10,6 +14,7 @@ var socket;
 function Home() {
   const { user, setUser } = useUserInfo();
   socket = useMemo(() => io(server), [])
+  console.log("Home.jsx");
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -21,17 +26,25 @@ function Home() {
       socket.disconnect();
     }
   }, [])
-  
+
 
   return (
-    <>
-      <AddContact />
-      <br /><br />
+    <RoomProvider>
+      <div className='container'>
+        <div className='contact-list'>
+          <AddContact />
+          <br /><br />
 
-      <ContactList contacts={user.contacts} />
-    </>
+          <ContactList contacts={user.contacts} />
+        </div>
+
+        <div className='chat-window'>
+          <Outlet />
+        </div>
+      </div>
+    </RoomProvider>
   )
 }
 
-export {socket}
+export { socket }
 export default Home

@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import axios from "axios"
 import { useUserInfo } from "./Contexts/user.jsx"
 import SignUp from "./Pages/SignUp/SignUp.jsx"
+import Room from "./Components/Room.jsx"
 const server = import.meta.env.VITE_SERVER;
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
   const token = localStorage.getItem("token")
 
   useEffect(() => {
-    
+
     const login = async () => {
       try {
         const response = await axios.get(`${server}/getuser`, {
@@ -29,7 +30,7 @@ function App() {
       }
     }
     if (token) login();
-  },[])
+  }, [])
 
   // useEffect(()=>{
   //   const server = import.meta.env.VITE_SERVER;
@@ -52,7 +53,9 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={isLogged ? <Home /> : <SignIn />} />
+      <Route path="/" element={isLogged ? <Home /> : <SignIn />} >
+        <Route path=":id" element={<Room />} />
+      </Route>
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
     </Routes>

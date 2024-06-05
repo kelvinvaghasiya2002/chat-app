@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import 'dotenv/config'
 import loginRouter from "./Routes/Auth/localAuth.js";
 import ContactRouter from "./Routes/Contacts/contact.js";
+import MsgRouter from "./Routes/Messages/Message.js";
 import {createServer} from "http";
 import { Server } from "socket.io";
 import cors from "cors";
@@ -42,13 +43,15 @@ mongoose.connect(mongoUrl).then(()=>{
     console.log(err);
 })
 
-const socket = socketHandler(io);  // function from socket.js file
+socketHandler(io);
+
 
 
 // ------------------------  Routers -----------------------------
 
 app.use(loginRouter);
 app.use(ContactRouter);
+app.use(MsgRouter);
 
 app.get("/",(req,res)=>{
     res.json({
