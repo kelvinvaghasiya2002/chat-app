@@ -4,7 +4,7 @@ import { useUserInfo } from '../Contexts/user.jsx'
 import { socket } from '../Pages/Home/Home.jsx';
 const server = import.meta.env.VITE_SERVER;
 
-function AddContact() {
+function AddContact({ state }) {
     const { user, setUser } = useUserInfo();
     const [email, setEmail] = useState("");
 
@@ -25,18 +25,20 @@ function AddContact() {
 
     socket.on("from-user", (user) => {
         setUser(user)
-      })
+    })
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                placeholder='enter a email'
-                value={email}
-                name='email'
-                onChange={handleEmailChange}
-            />
-            <button type='submit'>Add</button>
-        </form>
+        <div style={{display : state ? "block" : "none"}}>
+            <form onSubmit={handleSubmit}>
+                <input
+                    placeholder='enter a email'
+                    value={email}
+                    name='email'
+                    onChange={handleEmailChange}
+                />
+                <button type='submit'>Add</button>
+            </form>
+        </div>
     )
 }
 

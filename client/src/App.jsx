@@ -32,25 +32,6 @@ function App() {
     if (token) login();
   }, [])
 
-  // useEffect(()=>{
-  //   const server = import.meta.env.VITE_SERVER;
-  //   const socket = io(server)
-  //   socket.on("connect",()=>{
-  //     console.log(`${socket.id} connected`);
-  //   })
-  //   socket.on("welcome",(m)=>{
-  //     console.log(m);
-  //   })
-
-  //   socket.on("joined-msg",(m)=>{
-  //     console.log(m);
-  //   })
-
-  //   return ()=>{
-  //     socket.disconnect();
-  //   }
-  // })
-
   return (
     <Routes>
       <Route path="/" element={isLogged ? <Home /> : <SignIn />} >

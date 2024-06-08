@@ -6,6 +6,7 @@ import AddContact from '../../Components/AddContact.jsx';
 import { Outlet } from 'react-router-dom';
 import RoomProvider from '../../Contexts/room.jsx';
 import "./Home.css"
+import Header from '../../Components/Header.jsx';
 
 const server = import.meta.env.VITE_SERVER;
 var socket;
@@ -15,6 +16,7 @@ function Home() {
   const { user, setUser } = useUserInfo();
   socket = useMemo(() => io(server), [])
   console.log("Home.jsx");
+  const [addContactState, setAddContactState] = useState(false)
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -28,12 +30,17 @@ function Home() {
   }, [])
 
 
+  const changeAddContactState = () => {
+    setAddContactState(!addContactState);
+  }
+
+
   return (
     <RoomProvider>
       <div className='container'>
         <div className='contact-list'>
-          <AddContact />
-          <br /><br />
+          <Header changeState={changeAddContactState} />
+          <AddContact state={addContactState} />
 
           <ContactList contacts={user.contacts} />
         </div>
@@ -41,7 +48,16 @@ function Home() {
         <div className='chat-window'>
           <Outlet />
         </div>
+
+
       </div>
+
+      {/* <h1>Heldscsv</h1>
+      <h1>Heldscsv</h1>
+      <h1>Heldscsv</h1>
+      <h1>Heldscsv</h1>
+      <h1>Heldscsv</h1> */}
+
     </RoomProvider>
   )
 }

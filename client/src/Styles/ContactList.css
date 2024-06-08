@@ -1,0 +1,55 @@
+.contactlist-container-section {
+    position: relative;
+    overflow: hidden;
+    margin-top: 1vh;
+    padding: 0;
+}
+
+.contactlist-container {
+    padding: 7vh 1.3vw 0 2vw;
+    height: 73vh;
+    overflow-y: auto;
+}
+
+
+.contactlist-container::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 20vh;
+    /* Height of the fading area */
+    pointer-events: none;
+    z-index: 1;
+}
+
+.contactlist-container::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.profile-icon {
+    height: 8vh;
+    aspect-ratio: 1;
+}
+
+.contactlict-member {
+    display: flex;
+    gap: 0.8vw;
+    cursor: pointer;
+}
+
+
+.contact-name {
+    font-weight: 600;
+}
+
+.last-message {
+    color: #919191;
+    font-size: 1vw;
+}

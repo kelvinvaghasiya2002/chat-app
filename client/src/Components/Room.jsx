@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import RoomProvider, { useRoomInfo } from '../Contexts/room';
 import { useUserInfo } from '../Contexts/user';
+import "../Styles/Room.css"
 import MessageList from './MessageList';
 import WriteMessage from './WriteMessage';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { socket } from '../Pages/Home/Home.jsx';
+import RoomHeader from './RoomHeader.jsx';
 
 const server = import.meta.env.VITE_SERVER;
 
 function Room() {
-    const { user } = useUserInfo();
     const { room, setRoom } = useRoomInfo();
 
     const { id } = useParams();
@@ -33,11 +34,7 @@ function Room() {
 
     return (
         <div>
-            <div>
-                {
-                    room?.members[0] === user.email ? <h1>{room?.members[1]}</h1> : <h1>{room?.members[0]}</h1>
-                }
-            </div>
+            <RoomHeader room={room}  />
 
             <MessageList messages={room?.messages} />
 

@@ -1,3 +1,15 @@
+section{
+    background-color: white;
+    border-radius: 1.3vw;
+    padding: 0 1.3vw;
+}
+
 .container{
     display: flex;
 }
+
+.contact-list{
+    width: 28vw;
+    margin-left: 9vw;
+}
+

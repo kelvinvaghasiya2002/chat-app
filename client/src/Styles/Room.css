@@ -1,0 +1,38 @@
+.room-header-container{
+    display: flex;
+    height: 12vh;
+    margin-left: 1vh;
+    align-items: center;
+    width: 55vw;
+    padding: 0 1.9vw !important;
+    justify-content: space-between;
+}
+
+.profile{
+    height: 7vh;
+    aspect-ratio: 1;
+}
+
+.profile-and-contact{
+    display: flex;
+    gap: 1vw;
+    align-items: center;
+}
+
+.status {
+    color: #919191;
+    font-size: 1vw;
+}
+
+
+.profile-button{
+    background-color: #010019;
+    color: aliceblue;
+    border: none;
+    height: 7vh;
+    width: 15vh;
+    border-radius: 5vh;
+    font-family: "Poppins", sans-serif;
+    font-size: 1vw;
+    cursor: pointer;
+}
