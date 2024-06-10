@@ -1,5 +1,5 @@
 // import React from 'react'
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import Home from "./Pages/Home/Home.jsx"
 import SignIn from "./Pages/SignIn/SignIn.jsx"
 import { useEffect } from "react"
@@ -34,7 +34,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={isLogged ? <Home /> : <SignIn />} >
+      <Route path="/" element={isLogged ? <Home /> : <Navigate to="/signin" replace={true} />} >
         <Route path=":id" element={<Room />} />
       </Route>
       <Route path="/signin" element={<SignIn />} />

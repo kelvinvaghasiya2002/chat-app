@@ -1,4 +1,5 @@
 import mongoose, { Mongoose } from "mongoose";
+import { messageSchema } from "./Room.js";
 
 const ContactSchema = new mongoose.Schema({
     email : {
@@ -6,6 +7,12 @@ const ContactSchema = new mongoose.Schema({
     },
     username : {
         type : String
+    },
+    lastMessage : {
+        type : [messageSchema]
+    },
+    pendingMessages : {
+        type : Number 
     }
 })
 

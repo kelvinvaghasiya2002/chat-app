@@ -1,10 +1,16 @@
 import mongoose from "mongoose";
 
-const messageSchema = new mongoose.Schema({
+export const messageSchema = new mongoose.Schema({
     auther : {
         type : String
     },
     content : {
+        type : String
+    },
+    date : {
+        type : String
+    },
+    time : {
         type : String
     }
 })

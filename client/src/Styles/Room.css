@@ -1,4 +1,4 @@
-.room-header-container{
+.room-header-container {
     display: flex;
     height: 12vh;
     margin-left: 1vh;
@@ -8,12 +8,12 @@
     justify-content: space-between;
 }
 
-.profile{
+.profile {
     height: 7vh;
     aspect-ratio: 1;
 }
 
-.profile-and-contact{
+.profile-and-contact {
     display: flex;
     gap: 1vw;
     align-items: center;
@@ -25,7 +25,7 @@
 }
 
 
-.profile-button{
+.profile-button {
     background-color: #010019;
     color: aliceblue;
     border: none;
@@ -35,4 +35,135 @@
     font-family: "Poppins", sans-serif;
     font-size: 1vw;
     cursor: pointer;
+}
+
+
+
+
+/*--------------- STYLING FOR MessageList.jsx COMPONENT--------------- */
+
+
+
+
+#messageContainer {
+    display: flex;
+    flex-direction: column;
+    height: 69vh;
+    overflow-y: auto;
+    background-color: #ffffff;
+    /* background-image: url(http://www.transparenttextures.com/patterns/brushed-alum.png); */
+}
+
+.message:nth-child(1){
+    margin-top: 10vh;
+}
+
+.message:nth-last-child(1){
+    margin-bottom: 5vh;
+}
+
+
+.message{
+    position: relative;
+    min-width: 8vw;
+    max-width: 20vw;
+    margin-bottom: 0.3vh;
+    word-wrap: break-word;
+    padding: 1.7vh 2vh 3vh 2vh;
+    font-size: 1vw !important;
+}
+
+.message-time{
+    position: absolute;
+    right : 1vw;
+    bottom: 0.3vh;
+    font-size: 0.7vw;
+    opacity: 0.4;
+}
+
+
+.sent{
+    font-weight: 300;
+    align-self: flex-end;
+    color: white;
+    background-color: #ff4a09;
+}
+
+
+.recieved{
+    border-radius: 4vh 4vh 4vh 0 ;
+    font-weight: 400;
+    color: #010019;
+    align-self: flex-start;
+    background-color: #e6e6e6;
+}
+
+
+
+/* ------------------- STYLING FOR WriteMessage.jsx COMPONENT --------------- */
+
+
+
+/* ---- SECTION ---- */
+
+.message-container {
+    margin-top: 1vh;
+    margin-left: 1vh;
+}
+
+#writeMessage {
+    height: 10vh;
+    background-color: #e6e6e6;
+    padding: 0;
+}
+
+
+/* ---- FORM ---- */
+
+.writeMessageForm {
+    display: flex;
+    gap: 1vh;
+}
+
+
+/* -------------- */
+
+
+.writeMessageInput {
+    width: 53vw;
+    background-color: white;
+    height: 10vh;
+    border-radius: 1.3vw;
+    display: flex;
+    align-items: center;
+    padding-left: 1vw;
+}
+
+.writeMessageInput input {
+    width: 70%;
+    border: none;
+    outline: none;
+    border-radius: 1.3vw;
+    height: 8vh;
+    font-size: 2vw;
+}
+
+
+.writeMessageInput input::placeholder {
+    color: #919191;
+    opacity: 0.3;
+    font-size: 1.5vw;
+}
+
+
+.send-icon-div button {
+    width: 4.5vw;
+    height: 100%;
+    border-radius: 1.3vw;
+    border: none;
+    background-color: #ff4a09;
+}
+
+.send-icon {
+    height: 2vw;
 }

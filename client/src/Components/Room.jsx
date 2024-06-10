@@ -20,25 +20,27 @@ function Room() {
             try {
                 const response = await axios.get(`${server}/getroom?id=${id}`);
                 setRoom(response.data.room)
-                socket.emit("join-room",response.data.room._id);
+                socket.emit("join-room", response.data.room._id);
             } catch (error) {
                 console.log(error);
             }
         }
         getRoom();
-    },[])
+    }, [])
 
-    socket.on("update-room",(room)=>{
+    socket.on("update-room", (room) => {
         setRoom(room);
     })
 
     return (
         <div>
-            <RoomHeader room={room}  />
+            <RoomHeader room={room} />
+
 
             <MessageList messages={room?.messages} />
 
             <WriteMessage />
+
 
         </div>
     )

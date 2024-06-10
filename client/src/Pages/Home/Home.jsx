@@ -13,7 +13,7 @@ var socket;
 
 
 function Home() {
-  const { user, setUser } = useUserInfo();
+  const { user } = useUserInfo();
   socket = useMemo(() => io(server), [])
   console.log("Home.jsx");
   const [addContactState, setAddContactState] = useState(false)
@@ -42,7 +42,7 @@ function Home() {
           <Header changeState={changeAddContactState} />
           <AddContact state={addContactState} />
 
-          <ContactList contacts={user.contacts} />
+          <ContactList contacts={user.contacts} userEmail={user.email} />
         </div>
 
         <div className='chat-window'>
