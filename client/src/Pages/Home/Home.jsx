@@ -42,7 +42,7 @@ function Home() {
           <Header changeState={changeAddContactState} />
           <AddContact state={addContactState} />
 
-          <ContactList contacts={user.contacts} userEmail={user.email} />
+          <ContactList contacts={user.contacts} userEmail={user.email} username_1= {user.username} />
         </div>
 
         <div className='chat-window'>

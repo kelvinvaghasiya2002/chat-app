@@ -12,7 +12,7 @@ function RoomHeader({ room }) {
                 </div>
                 <div>
                     {
-                        room?.members[0] === user.email ? <p className='contact-name'>{room?.members[1]}</p> : <p className='contact-name'>{room?.members[0]}</p>
+                        room?.members[0].email === user.email ? <p className='contact-name'>{room?.members[1].email}</p> : <p className='contact-name'>{room?.members[0].email}</p>
                     }
                     <p className='status'>status</p>
                 </div>

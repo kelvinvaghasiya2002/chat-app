@@ -1,14 +1,20 @@
 import Room from "../../Models/Room.js";
 
 const getRoom = (req, res) => {
-    const { user_1, user_2 } = req.body;
+    const { user_1, user_2 , username_2 , username_1 } = req.body;
+    console.log(user_1, user_2 , username_2 , username_1 );
     Room.findOne({
-        $or:
+        $and:
             [
-                { members: [user_1, user_2] },
-                { members: [user_2, user_1] }
+                {
+                    "members.email" : user_1
+                },
+                {
+                    "members.email" : user_2
+                }
             ]
     }).then((response) => {
+        // console.log(response);
         res.status(200).json({
             success : "Found a room with containing these users!",
             room : response

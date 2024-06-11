@@ -23,13 +23,30 @@ const addContact = (req, res) => {
                             }
                         }
                     }, { new: true }).then((response) => {
-                        console.log("Contact added in user_2",response);
-                        io.to(response.socketId).emit("from-user",response);
+                        console.log("Contact added in user_2", response);
+                        io.to(response.socketId).emit("from-user", response);
+
+                        const room = new Room({
+                            members: [{
+                                email: user_1,
+                                username: username_1
+                            },
+                            {
+                                email: user_2,
+                                username: response.username
+                            }],
+                        })
+                        room.save().then((response) => {
+                            console.log("Room Is Created!", response);
+                        }).catch((err) => {
+                            console.log(err);
+                        })
+
                     }).catch((err) => {
                         console.log(err);
                     })
 
-                    
+
 
                     User.findOneAndUpdate({ email: user_1 }, {
                         $push: {
@@ -51,16 +68,6 @@ const addContact = (req, res) => {
                         })
                     })
 
-
-
-                    const room = new Room({
-                        members: [user_1, user_2],
-                    })
-                    room.save().then((response) => {
-                        console.log("Room Is Created!");
-                    }).catch((err) => {
-                        console.log(err);
-                    })
                 } else {
                     res.status(400).json({
                         error: "This User doen't exist!"

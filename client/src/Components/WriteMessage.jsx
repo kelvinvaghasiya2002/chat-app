@@ -19,7 +19,8 @@ function WriteMessage() {
             const response = await axios.post(`${server}/savemessage?id=${room._id}`,
                 {
                     auther: user.username,
-                    content: message
+                    content: message,
+                    user : user.email
                 }
             );
             setMessage("")

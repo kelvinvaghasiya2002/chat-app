@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import RoomProvider, { useRoomInfo } from '../Contexts/room';
-import { useUserInfo } from '../Contexts/user';
+import React, { useEffect } from 'react'
+import  { useRoomInfo } from '../Contexts/room';
+// import { useUserInfo } from '../Contexts/user';
 import "../Styles/Room.css"
 import MessageList from './MessageList';
 import WriteMessage from './WriteMessage';
@@ -28,8 +28,9 @@ function Room() {
         getRoom();
     }, [])
 
-    socket.on("update-room", (room) => {
-        setRoom(room);
+    socket.on("update-room", (Room) => {
+        console.log(room.members  , Room.members);
+        setRoom(Room);
     })
 
     return (

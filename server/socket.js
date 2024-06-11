@@ -20,7 +20,6 @@ const socketHandler = (io) => {
         socket.on("join-room",(id)=>{
             console.log("Hey", id);
             socket.join(id);
-            // console.log(socket.rooms);
         })
 
         socket.emit("hi","Heelo")

@@ -15,9 +15,18 @@ export const messageSchema = new mongoose.Schema({
     }
 })
 
+const memberSchema = new mongoose.Schema({
+    email : {
+        type : String
+    },
+    username : {
+        type : String
+    }
+})
+
 const roomSchema = new mongoose.Schema({
     members : {
-        type : [String]
+        type : [memberSchema]
     },
     messages : {
         type : [messageSchema]

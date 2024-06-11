@@ -9,7 +9,7 @@ const ContactSchema = new mongoose.Schema({
         type : String
     },
     lastMessage : {
-        type : [messageSchema]
+        type : messageSchema
     },
     pendingMessages : {
         type : Number 
