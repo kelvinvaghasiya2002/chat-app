@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import 'dotenv/config'
 import loginRouter from "./Routes/Auth/localAuth.js";
-import ContactRouter from "./Routes/Contacts/contact.js";
+import ContactRouter from "./Routes/Contacts/Contact.js";
 import MsgRouter from "./Routes/Messages/Message.js";
 import {createServer} from "http";
 import { Server } from "socket.io";
