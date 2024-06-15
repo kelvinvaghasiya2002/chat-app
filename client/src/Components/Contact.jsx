@@ -5,10 +5,12 @@ import axios from "axios"
 import accountImg from "../assets/account.png"
 const server = import.meta.env.VITE_SERVER;
 import { socket } from '../Pages/Home/Home';
+import { useContactList } from '../Contexts/Contacts';
 
 function Contact({ item, userEmail, username_1 }) {
     const navigate = useNavigate();
-    const { room, setRoom } = useRoomInfo();
+    const {setContacts} = useContactList();
+    const { setRoom } = useRoomInfo();
     const handleContact = async (item) => {
         console.log(item);
         try {
@@ -26,6 +28,11 @@ function Contact({ item, userEmail, username_1 }) {
             console.log(error);
         }
     }
+
+    socket.on("update-contactList",(data)=>{
+        console.log(data);
+        setContacts(data)
+    })
     return (
         <div onClick={() => { handleContact(item) }} className='contactlict-member'>
             <div>
@@ -36,15 +43,15 @@ function Contact({ item, userEmail, username_1 }) {
 
                     <p className='contact-name'>{item.username}</p>
 
-                    <span className='message-time-contactList'> 15:42</span>
+                    <span className='message-time-contactList'>{item.lastMessage?.time}</span>
 
                 </div>
 
                 <div className='contact-name-div'>
 
-                    <p className='last-message'>last message</p>
+                    <p className='last-message'>{item.lastMessage?.content}</p>
 
-                    <span className='message-time-contactList pending-msg'>2</span>
+                    {/* <span className='message-time-contactList pending-msg'>2</span> */}
 
                 </div>
             </div>

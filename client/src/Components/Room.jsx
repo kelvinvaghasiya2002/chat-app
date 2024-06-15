@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import  { useRoomInfo } from '../Contexts/room';
-// import { useUserInfo } from '../Contexts/user';
 import "../Styles/Room.css"
 import MessageList from './MessageList';
 import WriteMessage from './WriteMessage';
@@ -13,7 +12,7 @@ const server = import.meta.env.VITE_SERVER;
 
 function Room() {
     const { room, setRoom } = useRoomInfo();
-
+    console.log("room");
     const { id } = useParams();
     useEffect(() => {
         const getRoom = async () => {

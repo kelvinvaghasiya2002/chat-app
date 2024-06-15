@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { useUserInfo } from '../Contexts/user.jsx'
 import { socket } from '../Pages/Home/Home.jsx';
+import { useContactList } from '../Contexts/Contacts.jsx';
 const server = import.meta.env.VITE_SERVER;
 
 function AddContact({ state }) {
     const { user, setUser } = useUserInfo();
+    const {setContacts} = useContactList();
     const [email, setEmail] = useState("");
 
     const handleSubmit = async (event) => {
@@ -17,6 +19,7 @@ function AddContact({ state }) {
         })
         console.log(response);
         setUser(response.data.user);
+        setContacts(response.data.user.contacts)
     }
 
     const handleEmailChange = (event) => {
@@ -24,7 +27,9 @@ function AddContact({ state }) {
     }
 
     socket.on("from-user", (user) => {
+        console.log(user);
         setUser(user)
+        setContacts(user.contacts);
     })
 
     return (

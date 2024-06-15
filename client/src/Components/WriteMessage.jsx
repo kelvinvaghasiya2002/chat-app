@@ -4,9 +4,12 @@ import { useRoomInfo } from '../Contexts/room';
 import axios from "axios"
 const server = import.meta.env.VITE_SERVER;
 import sendIcon from "../assets/send.png"
+import { useContactList } from '../Contexts/Contacts';
 
 function WriteMessage() {
+    console.log("writeMessage");
     const { user } = useUserInfo();
+    const { setContacts } = useContactList();
     const { room, setRoom } = useRoomInfo();
     const [message, setMessage] = useState("");
     const handleChange = (event) => {
@@ -15,17 +18,38 @@ function WriteMessage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const time = `${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+
+        var currentDate = new Date();
+
+        var day = currentDate.getDate();
+        var month = currentDate.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month (0-11)
+        var year = currentDate.getFullYear();
+
+        var formattedDay = day < 10 ? '0' + day : day;
+        var formattedMonth = month < 10 ? '0' + month : month;
+
+        var date = formattedDay + ' ' + formattedMonth + ' ' + year;
+        console.log(date);
+
+        console.log(time);
         try {
             const response = await axios.post(`${server}/savemessage?id=${room._id}`,
                 {
                     auther: user.username,
                     content: message,
-                    user : user.email
+                    user: user.email,
+                    time: time,
+                    date : date
                 }
             );
             setMessage("")
             console.log(response);
-            setRoom(response.data.room)
+            setRoom(response.data.room);
+            setContacts(response.data.contactList)
         } catch (error) {
             console.log(error);
         }

@@ -7,10 +7,12 @@ import axios from "axios"
 import { useUserInfo } from "./Contexts/user.jsx"
 import SignUp from "./Pages/SignUp/SignUp.jsx"
 import Room from "./Components/Room.jsx"
+import { useContactList } from "./Contexts/Contacts.jsx"
 const server = import.meta.env.VITE_SERVER;
 
 function App() {
-  const { user, setUser, isLogged, setLogged } = useUserInfo();
+  const { setUser, isLogged, setLogged } = useUserInfo();
+  const { setContacts} = useContactList();
   const token = localStorage.getItem("token")
 
   useEffect(() => {
@@ -25,6 +27,7 @@ function App() {
         console.log(response);
         setLogged(response.data.login)
         setUser(response.data.user)
+        setContacts(response.data.user.contacts)
       } catch (error) {
         console.log(error.response.data.error);
       }

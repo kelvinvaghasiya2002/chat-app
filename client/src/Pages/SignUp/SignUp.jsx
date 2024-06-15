@@ -2,13 +2,15 @@ import { useState } from 'react'
 import axios from 'axios';
 import { Link, Navigate } from 'react-router-dom';
 import { useUserInfo } from '../../Contexts/user';
+import GoogleSI from '../SignIn/GoogleSI';
 
 function SignUp() {
-  const {user , setUser , isLogged , setLogged} = useUserInfo();
+  const { user, setUser, isLogged, setLogged } = useUserInfo();
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: "",
-    username : ""
+    username: "",
+    confirmPassword: ""
   })
 
   const handleSubmit = async (e) => {
@@ -19,8 +21,8 @@ function SignUp() {
       const response = await axios.post(`${url}/adduser`, {
         email: loginDetails.email,
         password: loginDetails.password,
-        socketId : "",
-        username:loginDetails.username
+        socketId: "",
+        username: loginDetails.username
       })
       console.log(response.data.user);
       setUser(response.data.user);
@@ -40,44 +42,75 @@ function SignUp() {
       })
     })
   }
+
+  
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="email"
-        value={loginDetails.email}
-        placeholder="email"
-        type="email"
-        onChange={handleChange} />
+    <div id="sign-in">
+      <div className="sign-in-container" style={{maxHeight:"80vh" ,padding : "5vh 8vh"}}>
+        <div style={{ width: "90%" }}>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <h3>
+                Create Account
+              </h3>
+              <span>Use valid email to sign up.</span>
+            </div>
 
-      <br /><br />
+            <div className="input-div">
+              <input
+                name="email"
+                value={loginDetails.email}
+                placeholder="example@gmail.com"
+                type="email"
+                onChange={handleChange} />
+            </div>
 
-      <input
-        name="username"
-        value={loginDetails.username}
-        placeholder="username"
-        type="text"
-        onChange={handleChange} />
+            <div className="input-div">
+              <input
+                name="username"
+                value={loginDetails.username}
+                placeholder="kelvin_vaghasiya"
+                type="text"
+                onChange={handleChange} />
+            </div>
 
-      <br /><br />
+            <div className="input-div">
+              <input
+                name="password"
+                value={loginDetails.password}
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
+                type="password"
+                onChange={handleChange} />
+            </div>
 
-      <input
-        name="password"
-        value={loginDetails.password}
-        placeholder="password"
-        type="password"
-        onChange={handleChange} />
+            <div className="input-div">
+              <input
+                name="confirmPassword"
+                value={loginDetails.confirmPassword}
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
+                type="password"
+                onChange={handleChange} />
+            </div>
 
-      <br /><br />
+            <button className="signin-button"><p>Sign up</p></button>
+            <br /><br />
 
+          </form>
 
-      <button>Sign up</button>
+          <GoogleSI />
 
-      <br /><br />
-      <Link to="/signin" >Sign In</Link>
-      {
-        isLogged && <Navigate to="/" replace={true}/>
-      }
-    </form>
+          <div className="dont-have-account">
+            <span>Already have an account ?</span> <Link to="/signin" >Sign In</Link>
+          </div>
+
+          {
+            isLogged && <Navigate to="/" replace={true} />
+          }
+
+        </div>
+      </div>
+    </div>
+
   )
 
 }

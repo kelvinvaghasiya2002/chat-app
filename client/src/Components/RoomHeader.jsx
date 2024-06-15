@@ -3,6 +3,7 @@ import { useUserInfo } from '../Contexts/user';
 import accountImg from "../assets/account.png"
 
 function RoomHeader({ room }) {
+    console.log("RoomHeader");
     const { user } = useUserInfo();
     return (
         <section className='room-header-container'>

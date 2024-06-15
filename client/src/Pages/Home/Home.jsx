@@ -37,12 +37,13 @@ function Home() {
 
   return (
     <RoomProvider>
+
       <div className='container'>
         <div className='contact-list'>
           <Header changeState={changeAddContactState} />
           <AddContact state={addContactState} />
 
-          <ContactList contacts={user.contacts} userEmail={user.email} username_1= {user.username} />
+          <ContactList userEmail={user.email} username_1={user.username} />
         </div>
 
         <div className='chat-window'>

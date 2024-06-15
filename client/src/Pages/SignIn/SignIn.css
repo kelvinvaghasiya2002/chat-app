@@ -1,0 +1,134 @@
+#sign-in{
+    height: 90vh;
+    width: 95vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e6e6e6;
+}
+
+
+.sign-in-container{
+    border-radius: 2vw;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 10vh 5vw;
+    background-color: white;
+    width: 25vw;
+    display: flex;
+    justify-content: center;
+}
+
+
+.sign-in-container input{
+    height: 5vh;
+    border-radius: 1.5vh;
+    padding: 1vh 0 1vh 2vh;
+    font-size: 2.5vh;
+    width: 94%;
+    border: 0.3vh solid #010019;
+    outline: none;
+}
+
+.input-div{
+    margin: 5vh 0;
+}
+
+
+.sign-in-container input::placeholder{
+    color : #010019;
+    opacity: 0.6;
+}
+
+
+.signin-button{
+    height: 7vh;
+    border-radius: 1.5vh;
+    padding: 1vh;
+    font-size: 2.5vh;
+    width: 100%;
+    background-color: #010019;
+    border: none;
+    color: aliceblue;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+}
+
+.google-button{
+    border: 0.3vh solid #010019;
+    background-color: white !important;
+    color: #010019;
+    display: flex;
+    gap: 3vw;
+    padding-left: 2vh;
+}
+
+.google-button p , .google-button img{
+    align-self: center;
+}
+
+.google-button img{
+    height: 3vh;
+    width: 3vh;
+}
+
+
+.dont-have-account{
+    margin-top: 4vh;
+    font-size: 2.2vh;
+}
+
+.sign-in-container span{
+    opacity: 0.6;
+}
+
+
+.dont-have-account a{
+    text-decoration: none;   
+}
+
+.dont-have-account a:hover{
+    text-decoration : underline;
+    font-weight: 500;  
+}
+
+
+
+
+
+
+@media only screen and (min-width : 727px) and (max-width : 1000px) {
+    .sign-in-container{
+        width: 30vw;
+    }
+}
+
+
+@media only screen and (min-width : 481px) and (max-width : 726px) {
+    .sign-in-container{
+        width: 50vw;
+    }
+}
+
+
+
+@media only screen and (max-width : 480px) {
+    .sign-in-container{
+        width: 100vw;
+        border-radius: 10vw;
+    }
+    .dont-have-account{
+        margin-top: 4vh;
+        font-size: 2vh;
+    }
+    .sign-in-container h3{
+        font-size: 3vh;
+    }
+
+    .signin-button {
+        height: 6vh;
+    }
+
+    .sign-in-container input{
+        height: 4vh;
+    }
+}

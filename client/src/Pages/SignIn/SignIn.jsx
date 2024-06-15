@@ -1,76 +1,99 @@
 // import React from 'react'
-
+import "./SignIn.css"
+import google from "../../assets/googleSI.png"
 import axios from "axios";
 import { useState } from "react"
 import { Link, Navigate } from "react-router-dom";
 import { useUserInfo } from "../../Contexts/user.jsx";
+import { useContactList } from "../../Contexts/Contacts.jsx";
+import GoogleSI from "./GoogleSI.jsx";
 
 function SignIn() {
-  const { setUser , isLogged , setLogged} = useUserInfo();
+  const { setUser, isLogged, setLogged } = useUserInfo();
+  const { setContacts } = useContactList();
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: ""
   })
 
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(loginDetails);
     const url = import.meta.env.VITE_SERVER;
     try {
-      const response = await axios.post(`${url}/loginuser` , {
-        email : loginDetails.email,
-        password : loginDetails.password
+      const response = await axios.post(`${url}/loginuser`, {
+        email: loginDetails.email,
+        password: loginDetails.password
       })
       console.log(response.data.user);
       setUser(response.data.user);
       setLogged(true)
-      localStorage.setItem("token",response.data.token)
+      setContacts(response.data.user.contacts)
+      localStorage.setItem("token", response.data.token)
     } catch (error) {
       console.log(error);
     }
   }
 
-  const handleChange = (event)=>{
-    const {name , value} = event.target;
-    setLoginDetails((prevValue)=>{
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setLoginDetails((prevValue) => {
       return ({
         ...prevValue,
-        [name] : value
+        [name]: value
       })
     })
   }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="email"
-        value={loginDetails.email}
-        placeholder="email"
-        type="email"
-        onChange={handleChange} />
+    <div id="sign-in">
+      <div className="sign-in-container">
+        <div style={{width : "90%"}}>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <h3>
+                Welcome Back!
+              </h3>
+              <span>Use your credencials to log in.</span>
+            </div>
+            <div className="input-div">
+              <input
+                name="email"
+                value={loginDetails.email}
+                placeholder="example@gmail.com"
+                type="email"
+                onChange={handleChange} />
+            </div>
 
-      <br /><br />
+            <div className="input-div">
+              <input
+                name="password"
+                value={loginDetails.password}
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
+                type="password"
+                onChange={handleChange} />
+            </div>
 
-      <input
-        name="password"
-        value={loginDetails.password}
-        placeholder="password"
-        type="password"
-        onChange={handleChange} />
+            
 
-      <br /><br />
+            <button className="signin-button"><p>Sign In</p></button>
 
+            <br /><br />
+          </form>
 
-      <button>Sign In</button>
+          <GoogleSI />
 
-      <br /><br />
+          <div className="dont-have-account">
+             <span>Don't have an account ?</span> <Link to="/signup" >Sign Up</Link>
+          </div>
 
-
-      <Link to="/signup" >Sign Up</Link>
-      {
-        isLogged && <Navigate to="/" replace={true}/>
-      }
-    </form>
+        </div>
+        {
+          isLogged && <Navigate to="/" replace={true} />
+        }
+      </div>
+    </div>
   )
 }
 

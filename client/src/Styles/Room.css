@@ -51,12 +51,29 @@
     height: 69vh;
     overflow-y: auto;
     background-color: #ffffff;
-    /* background-image: url(http://www.transparenttextures.com/patterns/brushed-alum.png); */
 }
+
+.date{
+    align-self: center;
+    min-width: 17vh;
+    background-color: #e6e6e6;
+    margin: 4vh 0;
+    text-align: center;
+    padding: 1.7vh 0;
+    border-radius: 5vh;    
+}
+
+.date p{
+    font-size: 2vh;
+    font-weight: 500;
+    color: #010019;
+}
+
 
 .message:nth-child(1){
     margin-top: 10vh;
 }
+
 
 .message:nth-last-child(1){
     margin-bottom: 5vh;
@@ -91,12 +108,14 @@
 
 
 .recieved{
-    border-radius: 4vh 4vh 4vh 0 ;
+    /* border-radius: 4vh 4vh 4vh 0 ; */
     font-weight: 400;
     color: #010019;
     align-self: flex-start;
     background-color: #e6e6e6;
 }
+
+
 
 
 
