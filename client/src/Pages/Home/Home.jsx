@@ -7,6 +7,7 @@ import { Outlet } from 'react-router-dom';
 import RoomProvider from '../../Contexts/room.jsx';
 import "./Home.css"
 import Header from '../../Components/Header.jsx';
+import useClick from '../../Hooks/useClick.js';
 
 const server = import.meta.env.VITE_SERVER;
 var socket;
@@ -14,6 +15,12 @@ var socket;
 
 function Home() {
   const { user } = useUserInfo();
+  // const {onContactClick , setContactAppear , contactAppear} = useClick();
+  const [contactAppear , setContactAppear] = useState(true)
+  const onContactClick = ()=>{
+    console.log("fuck it" + " " + contactAppear);
+    setContactAppear(!contactAppear);
+}
   socket = useMemo(() => io(server), [])
   console.log("Home.jsx");
   const [addContactState, setAddContactState] = useState(false)
@@ -39,15 +46,16 @@ function Home() {
     <RoomProvider>
 
       <div className='container'>
-        <div className='contact-list'>
+        <div id='Contact-List' className={contactAppear ? 'contact-list' : ' contact-list Contact-List-none'}>
+
           <Header changeState={changeAddContactState} />
           <AddContact state={addContactState} />
 
-          <ContactList userEmail={user.email} username_1={user.username} />
+          <ContactList onContactClick={onContactClick} userEmail={user.email} username_1={user.username} />
         </div>
 
         <div className='chat-window'>
-          <Outlet />
+          <Outlet context={[onContactClick]} />
         </div>
 
 

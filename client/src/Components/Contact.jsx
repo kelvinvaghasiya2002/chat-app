@@ -7,12 +7,12 @@ const server = import.meta.env.VITE_SERVER;
 import { socket } from '../Pages/Home/Home';
 import { useContactList } from '../Contexts/Contacts';
 
-function Contact({ item, userEmail, username_1 }) {
+function Contact({ item, userEmail, username_1 , onContactClick }) {
     const navigate = useNavigate();
     const {setContacts} = useContactList();
     const { setRoom } = useRoomInfo();
     const handleContact = async (item) => {
-        console.log(item);
+        // console.log(item);
         try {
             const response = await axios.post(`${server}/getroom`, {
                 user_1: userEmail,
@@ -34,7 +34,7 @@ function Contact({ item, userEmail, username_1 }) {
         setContacts(data)
     })
     return (
-        <div onClick={() => { handleContact(item) }} className='contactlict-member'>
+        <div onClick={() => { handleContact(item) , onContactClick()}} className='contactlict-member'>
             <div>
                 <img className='profile-icon' src={accountImg} />
             </div>

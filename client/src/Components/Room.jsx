@@ -3,16 +3,19 @@ import  { useRoomInfo } from '../Contexts/room';
 import "../Styles/Room.css"
 import MessageList from './MessageList';
 import WriteMessage from './WriteMessage';
-import { useParams } from 'react-router-dom';
+import { useOutletContext, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { socket } from '../Pages/Home/Home.jsx';
 import RoomHeader from './RoomHeader.jsx';
+import useClick from '../Hooks/useClick.js';
 
 const server = import.meta.env.VITE_SERVER;
 
 function Room() {
     const { room, setRoom } = useRoomInfo();
-    console.log("room");
+    // const {onContactClick} = useClick();
+    // console.log("room");
+    const [onContactClick] = useOutletContext();
     const { id } = useParams();
     useEffect(() => {
         const getRoom = async () => {
@@ -25,7 +28,12 @@ function Room() {
             }
         }
         getRoom();
+
+        return ()=>{
+            onContactClick();
+        }
     }, [])
+    
 
     socket.on("update-room", (Room) => {
         console.log(room.members  , Room.members);
@@ -33,7 +41,7 @@ function Room() {
     })
 
     return (
-        <div>
+        <div className='slide-in-right'>
             <RoomHeader room={room} />
 
 

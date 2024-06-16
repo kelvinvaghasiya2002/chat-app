@@ -7,7 +7,7 @@ import sendIcon from "../assets/send.png"
 import { useContactList } from '../Contexts/Contacts';
 
 function WriteMessage() {
-    console.log("writeMessage");
+    // console.log("writeMessage");
     const { user } = useUserInfo();
     const { setContacts } = useContactList();
     const { room, setRoom } = useRoomInfo();

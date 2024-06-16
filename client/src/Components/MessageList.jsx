@@ -2,8 +2,8 @@ import React, { useRef, useEffect } from 'react'
 import { useUserInfo } from '../Contexts/user'
 
 function MessageList({ messages }) {
-    console.log(messages);
-    console.log("messageList");
+    // console.log(messages);
+    // console.log("messageList");
     const { user } = useUserInfo();
     const messageListRef = useRef(null)
 
@@ -19,7 +19,7 @@ function MessageList({ messages }) {
             {
                 messages?.map((message, index) => {
                     const isFirstMessage = index === 0 || message.date !== messages[index - 1]?.date;
-                    const isCurrentUser = (user.username === message.auther)?true:false;
+                    const isCurrentUser = (user.username === message.auther) ? true : false;
                     const isLastMessage = messages[index].auther === messages[index + 1]?.auther;
                     const borderRadiusStyle = {
                         borderRadius: isCurrentUser

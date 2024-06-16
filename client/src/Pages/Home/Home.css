@@ -1,15 +1,115 @@
-section{
+section {
     background-color: white;
     border-radius: 1.3vw;
     padding: 0 1.3vw;
 }
 
-.container{
+.container {
     display: flex;
 }
 
-.contact-list{
+.contact-list {
     width: 28vw;
     margin-left: 9vw;
 }
 
+
+.slide-in-right {
+    -webkit-animation: slide-in-right 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-right 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+
+@-webkit-keyframes slide-in-right {
+    0% {
+        -webkit-transform: translateX(1000px);
+        transform: translateX(1000px);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-right {
+    0% {
+        -webkit-transform: translateX(1000px);
+        transform: translateX(1000px);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+
+
+@media only screen and (max-width : 726px) {
+    .Contact-List-none {
+        display: none;
+    }
+
+    .contact-list {
+        width: 80vw;
+
+    }
+
+    section {
+        border-radius: 3vw;
+    }
+
+    #messageContainer{
+        width: 90vw;
+    }
+
+    .room-header-container{
+        width: 89vw !important;
+    }
+
+    .contact-name , .status{
+        font-size: 2.5vh !important;
+    }
+
+    .message{
+        min-width: 25vw !important;
+        max-width: 40vw !important;
+    }
+
+    .message-time{
+        font-size: 2vw !important;
+        right : 4vw !important;
+    }
+
+    .profile-button{
+        font-size: 3vw !important;
+    }
+
+    .writeMessageInput{
+        width: 70vw !important;
+        border-radius: 3vw !important;
+    }
+
+    .send-icon-div button{
+        width: 19vw !important;
+        border-radius: 3vw !important;
+    }
+
+    .writeMessageInput input{
+        font-size: 2.5vh !important;
+    }
+
+    .writeMessageInput input::placeholder{
+        font-size: 2.5vh !important;
+    }
+
+    .send-icon{
+        height: 5vw !important;
+    }
+}
