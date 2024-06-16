@@ -65,6 +65,10 @@ section {
         border-radius: 3vw;
     }
 
+    .container{
+        max-height: 90vh;
+    }
+
     #messageContainer{
         width: 90vw;
     }
@@ -74,7 +78,7 @@ section {
     }
 
     .contact-name , .status{
-        font-size: 2.5vh !important;
+        font-size: 2vh !important;
     }
 
     .message{
