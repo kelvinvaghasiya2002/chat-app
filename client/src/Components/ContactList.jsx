@@ -1,6 +1,7 @@
 import React from 'react'
 // import { useUserInfo } from '../Contexts/user';
 import "../Styles/ContactList.css"
+import "../Pages/Home/Home.css"
 import Contact from './Contact';
 import { useContactList } from '../Contexts/Contacts';
 
