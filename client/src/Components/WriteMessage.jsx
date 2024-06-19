@@ -53,6 +53,8 @@ function WriteMessage() {
         } catch (error) {
             console.log(error);
         }
+
+        document.getElementById("writeMessageInput").focus();
     }
 
     return (
@@ -67,6 +69,7 @@ function WriteMessage() {
                         placeholder='write a message...'
                         required
                         autoComplete='off'
+                        id='writeMessageInput'
                     />
                 </div>
                 <div className='send-icon-div'>
