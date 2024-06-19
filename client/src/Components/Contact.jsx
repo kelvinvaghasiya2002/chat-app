@@ -38,7 +38,7 @@ function Contact({ item, userEmail, username_1 , onContactClick }) {
             <div>
                 <img className='profile-icon' src={accountImg} />
             </div>
-            <div style={{ width: "100%" }}>
+            <div style={{ width: "100%"}}>
                 <div className='contact-name-div'>
 
                     <p className='contact-name'>{item.username}</p>

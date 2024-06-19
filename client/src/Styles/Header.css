@@ -1,4 +1,4 @@
-.header-container{
+.header-container {
     display: flex;
     justify-content: space-between;
     height: 12vh;
@@ -6,13 +6,34 @@
     padding: 0 1.9vw !important;
 }
 
-.AddContactButton{
+.AddContactButton {
     height: 6vh;
     aspect-ratio: 1;
     cursor: pointer;
 }
 
-.header-chat{
+.header-chat {
     font-weight: 600;
     letter-spacing: -0.1vw;
+}
+
+
+
+
+
+@media only screen and (max-width : 726px) {
+    .header-container {
+        padding: 0 5vw !important;
+    }
+
+    .AddContactButton {
+        height: 5.5vh;
+    }
+
+
+    .header-chat {
+        font-weight: 600;
+        letter-spacing: -0.5vw;
+        font-size: 4vh;
+    }
 }

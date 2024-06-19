@@ -57,8 +57,9 @@ section {
     }
 
     .contact-list {
-        width: 90vw;
-        margin-left: 3vw;
+        width: 100vw;
+        margin-left: 0;
+
     }
 
     section {
