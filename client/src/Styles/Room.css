@@ -186,3 +186,30 @@
 .send-icon {
     height: 2vw;
 }
+
+
+
+
+
+
+
+@media only screen and (max-width : 726px){
+    .profile-and-contact{
+        gap: 2vw;
+    }
+    .contactlist-container-section{
+        padding: 0 2vw;
+    }
+
+    .contactlict-member{
+        gap: 2vw;
+    }
+
+    .message-time{
+        opacity: 0.7;
+    }
+
+    #messageContainer{
+        max-height: 65vh;
+    }
+}
