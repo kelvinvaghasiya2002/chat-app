@@ -17,6 +17,11 @@
     letter-spacing: -0.1vw;
 }
 
+.hamburger{
+    display: flex;
+    align-items: center;
+}
+
 
 
 
@@ -35,5 +40,13 @@
         font-weight: 600;
         letter-spacing: -0.5vw;
         font-size: 4vh;
+    }
+
+
+}
+
+@media only screen and (min-width : 726px) {
+    .hamburger {
+        display: none !important;
     }
 }
