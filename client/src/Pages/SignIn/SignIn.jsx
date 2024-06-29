@@ -1,6 +1,5 @@
 // import React from 'react'
 import "./SignIn.css"
-import google from "../../assets/googleSI.png"
 import axios from "axios";
 import { useState } from "react"
 import { Link, Navigate } from "react-router-dom";
@@ -11,6 +10,7 @@ import GoogleSI from "./GoogleSI.jsx";
 function SignIn() {
   const { setUser, isLogged, setLogged } = useUserInfo();
   const { setContacts } = useContactList();
+  const [loading, setLoading] = useState(false)
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: ""
@@ -21,18 +21,23 @@ function SignIn() {
     e.preventDefault();
     console.log(loginDetails);
     const url = import.meta.env.VITE_SERVER;
+    setLoading(true);
     try {
       const response = await axios.post(`${url}/loginuser`, {
         email: loginDetails.email,
         password: loginDetails.password
       })
       console.log(response.data.user);
+      alert(response.data.success)
       setUser(response.data.user);
       setLogged(true)
       setContacts(response.data.user.contacts)
+      setLoading(false)
       localStorage.setItem("token", response.data.token)
     } catch (error) {
       console.log(error);
+      alert(error.response.data.error)
+      setLoading(false)
     }
   }
 
@@ -49,7 +54,7 @@ function SignIn() {
   return (
     <div id="sign-in">
       <div className="sign-in-container">
-        <div style={{width : "90%"}}>
+        <div style={{ width: "90%" }}>
           <form onSubmit={handleSubmit}>
             <div>
               <h3>
@@ -75,9 +80,14 @@ function SignIn() {
                 onChange={handleChange} />
             </div>
 
-            
 
-            <button className="signin-button"><p>Sign In</p></button>
+
+            <button className="signin-button">
+              {
+                loading ? <p>Loading . . .</p> : <p>Sign In</p>
+              }
+
+            </button>
 
             <br /><br />
           </form>
@@ -85,7 +95,7 @@ function SignIn() {
           <GoogleSI />
 
           <div className="dont-have-account">
-             <span>Don't have an account ?</span> <Link to="/signup" >Sign Up</Link>
+            <span>Don't have an account ?</span> <Link to="/signup" >Sign Up</Link>
           </div>
 
         </div>

@@ -1,0 +1,41 @@
+import nodemailer from "nodemailer"
+import otpGenerator from "otp-generator";
+
+const sendEmail = (req, res) => {
+    const { email } = req.body;
+    const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false, lowerCaseAlphabets: false })
+    console.log(otp,email);
+
+    const transporter = nodemailer.createTransport({
+        host: `${process.env.SMTP_HOST}`,
+        port: 587,
+        secure: false, // Use `true` for port 465, `false` for all other ports
+        auth: {
+            user: `${process.env.SMTP_USER}`,
+            pass: `${process.env.SMTP_PASS}`,
+        },
+    });
+
+
+    async function main() {
+        const info = await transporter.sendMail({
+            from: 'support@chat.com', // sender address
+            to: email,
+            subject: "Here's the 6-digit verification code you requested", // Subject line
+            html: `<h1>${otp}</h1><br><br><p>If you didn't request a code, kindly ignore!</p>`, // html body
+        });
+
+        console.log("Message sent: %s", info.messageId);
+    }
+
+    main().then(()=>{
+        res.json({
+            success : "Hello"
+        })
+    }).catch(err => {
+        console.log(err);
+    });
+}
+
+
+export default sendEmail;

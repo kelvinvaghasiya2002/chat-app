@@ -8,6 +8,7 @@ import {createServer} from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import socketHandler from "./socket.js";
+import EmailRouter from "./Routes/Emails/Email.js";
 
 
 // -------------------------- Declarations ---------------------------
@@ -52,6 +53,7 @@ socketHandler(io);
 app.use(loginRouter);
 app.use(ContactRouter);
 app.use(MsgRouter);
+app.use(EmailRouter);
 
 app.get("/",(req,res)=>{
     res.json({
