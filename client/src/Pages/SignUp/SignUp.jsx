@@ -13,6 +13,9 @@ function SignUp() {
     confirmPassword: ""
   })
 
+  const [OTP, setOTP] = useState(false);
+  const [verifyOTP, setVerifyOTP] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(loginDetails);
@@ -43,12 +46,12 @@ function SignUp() {
     })
   }
 
-  
+
   return (
     <div id="sign-in">
-      <div className="sign-in-container" style={{maxHeight:"80vh" ,padding : "5vh 8vh"}}>
+      <div className="sign-in-container" style={{ maxHeight: "80vh", padding: "5vh 8vh" }}>
         <div style={{ width: "90%" }}>
-          <form onSubmit={handleSubmit}>
+          <form>
             <div>
               <h3>
                 Create Account
@@ -74,25 +77,47 @@ function SignUp() {
                 onChange={handleChange} />
             </div>
 
-            <div className="input-div">
-              <input
-                name="password"
-                value={loginDetails.password}
-                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
-                type="password"
-                onChange={handleChange} />
-            </div>
+            <button className="signin-button"><p>Get OTP</p></button>
 
-            <div className="input-div">
-              <input
-                name="confirmPassword"
-                value={loginDetails.confirmPassword}
-                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
-                type="password"
-                onChange={handleChange} />
-            </div>
+            {
+              OTP &&
+              <>
+                <div className="input-div">
+                  <input
+                    name="username"
+                    value={loginDetails.username}
+                    placeholder="kelvin_vaghasiya"
+                    type="text"
+                    onChange={handleChange} />
+                </div>
+                <button className="signin-button"><p>Verify OTP</p></button>
+              </>
+            }
 
-            <button className="signin-button"><p>Sign up</p></button>
+            {
+              (OTP && verifyOTP) &&
+              <>
+                <div className="input-div">
+                  <input
+                    name="password"
+                    value={loginDetails.password}
+                    placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
+                    type="password"
+                    onChange={handleChange} />
+                </div>
+
+                <div className="input-div">
+                  <input
+                    name="confirmPassword"
+                    value={loginDetails.confirmPassword}
+                    placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
+                    type="password"
+                    onChange={handleChange} />
+                </div>
+
+                <button onClick={handleSubmit} className="signin-button"><p>Sign up</p></button>
+              </>
+            }
             <br /><br />
 
           </form>

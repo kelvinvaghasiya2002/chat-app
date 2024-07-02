@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer"
 import otpGenerator from "otp-generator";
+import OTP from "../../Models/Otp.js";
+
 
 const sendEmail = (req, res) => {
     const { email } = req.body;
@@ -9,7 +11,7 @@ const sendEmail = (req, res) => {
     const transporter = nodemailer.createTransport({
         host: `${process.env.SMTP_HOST}`,
         port: 587,
-        secure: false, // Use `true` for port 465, `false` for all other ports
+        secure: false, 
         auth: {
             user: `${process.env.SMTP_USER}`,
             pass: `${process.env.SMTP_PASS}`,
@@ -29,8 +31,15 @@ const sendEmail = (req, res) => {
     }
 
     main().then(()=>{
-        res.json({
-            success : "Hello"
+        OTP.findOneAndDelete({email : email}).then((Response)=>{
+            console.log(Response );
+            const newOtp = new OTP({email : email, otp : otp});
+            newOtp.save().then((response)=>{
+                res.status(200).json({
+                    success : "OTP sent successfully",
+                    createdAt : response.createdAt
+                })
+            });
         })
     }).catch(err => {
         console.log(err);
